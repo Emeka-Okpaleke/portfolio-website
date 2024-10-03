@@ -40,7 +40,6 @@ const TAB_DATA = [
     const [tab, setTab] = useState("skills"); // Default to 'skills' tab
     const [isPending, startTransition] = useTransition();
   
-    // Function to handle tab change
     const handleTabChange = (id) => {
       startTransition(() => {
         setTab(id); // Update the active tab's id
@@ -58,7 +57,7 @@ const TAB_DATA = [
             alt="About Image"
           />
           
-          {/* About Content */}
+
           <div>
             <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
             <p className="text-base lg:text-lg">
