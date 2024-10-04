@@ -8,7 +8,7 @@ const TAB_DATA = [
       title: "Skills",
       id: "skills",
       content: (
-        <ul>
+        <ul className="list-disc pl-2">
           <li>Node.js</li>
           <li>JavaScript</li>
           <li>React</li>
@@ -58,7 +58,7 @@ const TAB_DATA = [
           />
           
 
-          <div>
+          <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
             <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
             <p className="text-base lg:text-lg">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
