@@ -9,6 +9,8 @@ const projectData = [
       "A responsive React website showcasing my portfolio and projects.",
     image: "/images/projects/1.png",
     tag: ["All", "Web"],
+    gitUrl:"/",
+    previewUrl:"/"
   },
   {
     id: 2,
@@ -16,6 +18,8 @@ const projectData = [
     description: "A Gatsby blog showcasing my latest blog posts and articles.",
     image: "/images/projects/2.png",
     tag: ["All", "Web"],
+    gitUrl:"/",
+    previewUrl:"/"
   },
   {
     id: 3,
@@ -24,6 +28,8 @@ const projectData = [
       "A WordPress theme showcasing my latest blog posts and articles.",
     image: "/images/projects/3.png",
     tag: ["All", "Web"],
+    gitUrl:"/",
+    previewUrl:"/"
   },
 ];
 
@@ -38,6 +44,8 @@ const ProjectSection = () => {
             title={project.title}
             description={project.description}
             imgUrl={project.image}
+            gitUrl={project.gitUrl}
+            previewUrl={project.previewUrl}
           />
         ))}
       </div>
