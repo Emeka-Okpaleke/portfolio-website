@@ -41,6 +41,7 @@ const EmailSection = () => {
           <label
             htmlFor="subject"
             // type="email"
+
             className="text-white block text-sm font-medium">
             Subject
           </label>
@@ -49,7 +50,7 @@ const EmailSection = () => {
             id="subject"
             required
             className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-            placeholder="Just saying hi"
+            placeholder="Just saying hello!"
           />
         </form>
       </div>
