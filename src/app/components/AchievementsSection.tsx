@@ -1,15 +1,24 @@
 "use client";
+
 import React from "react";
+import { FC } from "react";
 import dynamic from "next/dynamic";
 
-const AnimatedNumbers = dynamic(
-  () => {
-    return import("react-animated-numbers");
-  },
-  { ssr: false }
-);
+// Dynamic import for react-animated-numbers with `ssr: false`
+const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), { ssr: false });
 
-const achievementsList = [
+// Define the type for an achievement item
+type Achievement = {
+  metric: string;
+  value: string; // Keep as string to handle numbers with commas
+  prefix?: string;
+  postfix?: string;
+};
+
+
+
+// Achievement data with proper typing
+const achievementsList: Achievement[] = [
   {
     metric: "Projects",
     value: "100",
@@ -18,7 +27,7 @@ const achievementsList = [
   {
     prefix: "~",
     metric: "Users",
-    value: "100,000",
+    value: "100000", // Use unformatted value to allow parsing
   },
   {
     metric: "Awards",
@@ -30,11 +39,14 @@ const achievementsList = [
   },
 ];
 
-const AchievementsSection = () => {
+const AchievementsSection: React.FC = () => {
   return (
     <div className="py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
       <div className="sm:border-[#33353F] sm:border rounded-md py-8 px-16 flex flex-col sm:flex-row items-center justify-between">
         {achievementsList.map((achievement, index) => {
+          // Convert value to number for AnimatedNumbers
+          const numericValue = parseInt(achievement.value.replace(/,/g, ""), 10);
+
           return (
             <div
               key={index}
@@ -44,16 +56,14 @@ const AchievementsSection = () => {
                 {achievement.prefix}
                 <AnimatedNumbers
                   includeComma
-                  animateToNumber={parseInt(achievement.value)}
+                  animateToNumber={numericValue}
                   locale="en-US"
                   className="text-white text-4xl font-bold"
-                  configs={(_, index) => {
-                    return {
-                      mass: 1,
-                      friction: 100,
-                      tensions: 140 * (index + 1),
-                    };
-                  }}
+                  configs={(_: number, i: number) => ({
+                    mass: 1,
+                    friction: 100,
+                    tensions: 140 * (i + 1),
+                  })}
                 />
                 {achievement.postfix}
               </h2>

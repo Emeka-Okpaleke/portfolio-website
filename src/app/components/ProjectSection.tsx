@@ -1,10 +1,22 @@
- "use client";
+"use client";
+
 import React, { useState, useRef } from "react";
 import ProjectCard from "./ProjectCard";
 import ProjectTag from "./ProjectTag";
 import { motion, useInView } from "framer-motion";
 
-const projectsData = [
+// Define types for the project data
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  tag: string[];
+  gitUrl: string;
+  previewUrl: string;
+};
+
+const projectsData: Project[] = [
   {
     id: 1,
     title: "React Portfolio Website",
@@ -16,7 +28,7 @@ const projectsData = [
   },
   {
     id: 2,
-    title: "Potography Portfolio Website",
+    title: "Photography Portfolio Website",
     description: "Project 2 description",
     image: "/images/projects/2.png",
     tag: ["All", "Web"],
@@ -53,7 +65,7 @@ const projectsData = [
   {
     id: 6,
     title: "Full-stack Roadmap",
-    description: "Project 5 description",
+    description: "Project 6 description",
     image: "/images/projects/6.png",
     tag: ["All", "Web"],
     gitUrl: "/",
@@ -61,12 +73,12 @@ const projectsData = [
   },
 ];
 
-const ProjectsSection = () => {
-  const [tag, setTag] = useState("All");
-  const ref = useRef(null);
+const ProjectsSection: React.FC = () => {
+  const [tag, setTag] = useState<string>("All");
+  const ref = useRef<HTMLUListElement | null>(null);
   const isInView = useInView(ref, { once: true });
 
-  const handleTagChange = (newTag) => {
+  const handleTagChange = (newTag: string) => {
     setTag(newTag);
   };
 
@@ -86,17 +98,17 @@ const ProjectsSection = () => {
       </h2>
       <div className="text-white flex flex-row justify-center items-center gap-2 py-6">
         <ProjectTag
-          onClick={handleTagChange}
+          onClick={() => handleTagChange("All")}
           name="All"
           isSelected={tag === "All"}
         />
         <ProjectTag
-          onClick={handleTagChange}
+          onClick={() => handleTagChange("Web")}
           name="Web"
           isSelected={tag === "Web"}
         />
         <ProjectTag
-          onClick={handleTagChange}
+          onClick={() => handleTagChange("Mobile")}
           name="Mobile"
           isSelected={tag === "Mobile"}
         />
@@ -104,14 +116,13 @@ const ProjectsSection = () => {
       <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
         {filteredProjects.map((project, index) => (
           <motion.li
-            key={index}
+            key={project.id}
             variants={cardVariants}
             initial="initial"
             animate={isInView ? "animate" : "initial"}
             transition={{ duration: 0.3, delay: index * 0.4 }}
           >
             <ProjectCard
-              key={project.id}
               title={project.title}
               description={project.description}
               imgUrl={project.image}
